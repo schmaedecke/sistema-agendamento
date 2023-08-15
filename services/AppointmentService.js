@@ -1,3 +1,4 @@
+const AppointmentFactory = require("../factories/AppointmentFactory");
 var appointment = require("../models/Appointment");
 var mongoose = require("mongoose");
 
@@ -24,7 +25,16 @@ class AppointmentService {
   }
   async GetAll(showFinished) {
     if (!showFinished || showFinished == undefined) {
-      return await Appo.find({ finished: false });
+      var appos = await Appo.find({ finished: false });
+      var appointments = [];
+
+      appos.forEach((appointment) => {
+        if (appointment.date != undefined) {
+          appointments.push(AppointmentFactory.Build(appointment));
+        }
+      });
+
+      return appointments;
     } else {
       return await Appo.find();
     }
