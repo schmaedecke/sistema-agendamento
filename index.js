@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 app.use(express.static("public"));
+app.use(express.static(__dirname));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,4 +20,4 @@ app.get("/cadastro", (req, res) => {
 app.get("/", (req, res) => {
   res.send("OI!");
 });
-app.listen(8080, () => {});
+app.listen(8070, () => {});
