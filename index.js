@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const appointmentService = require("./services/AppointmentService")
+const appointmentService = require("./services/AppointmentService");
 
 app.use(express.static("public"));
 app.use(express.static(__dirname));
@@ -18,7 +18,7 @@ app.get("/cadastro", (req, res) => {
   res.render("create");
 });
 
-app.post("/create", async(req,res)=>{
+app.post("/create", async (req, res) => {
   var status = await appointmentService.Create(
     req.body.name,
     req.body.email,
@@ -26,17 +26,17 @@ app.post("/create", async(req,res)=>{
     req.body.description,
     req.body.date,
     req.body.time
-  )
+  );
 
-  if(status){
-    console.log('Cadastro realizado com sucesso')
-    return res.redirect('/')
-  }else{
-    res.send("Ocorreu uma falha")
+  if (status) {
+    console.log("Cadastro realizado com sucesso");
+    return res.redirect("/");
+  } else {
+    res.send("Ocorreu uma falha");
   }
-})
+});
 
 app.get("/", (req, res) => {
-  res.send("OI!");
+  res.render("index");
 });
 app.listen(8070, () => {});
