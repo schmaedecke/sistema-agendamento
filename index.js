@@ -51,6 +51,16 @@ app.get("/event/:id", async (req, res) => {
   var appointment = await AppointmentService.getById(req.params.id);
   console.log(appointment);
   res.render("event", { appo: appointment });
+
+  app.post("/finish", async (req, res) => {
+    var id = req.body.id;
+    var result = await AppointmentService.Finish(id);
+    if (!result) {
+      return res.send("Falhou");
+    } else {
+      return res.redirect("/");
+    }
+  });
 });
 
 app.listen(8070, () => {});
