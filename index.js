@@ -48,7 +48,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/event/:id", async (req, res) => {
-  res.json({ id: req.params.id });
+  var appointment = await AppointmentService.getById(req.params.id);
+  console.log(appointment);
+  res.render("event", { appo: appointment });
 });
 
 app.listen(8070, () => {});
