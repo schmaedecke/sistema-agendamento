@@ -14,6 +14,7 @@ class AppointmentService {
       date,
       time,
       finished: false,
+      notified: false,
     });
     try {
       await newAppo.save();
@@ -23,8 +24,11 @@ class AppointmentService {
       return false;
     }
   }
+
   async GetAll(showFinished) {
-    if (!showFinished || showFinished == undefined) {
+    if (showFinished) {
+      return await Appo.find();
+    } else {
       var appos = await Appo.find({ finished: false });
       var appointments = [];
 
@@ -35,8 +39,6 @@ class AppointmentService {
       });
 
       return appointments;
-    } else {
-      return await Appo.find();
     }
   }
 }

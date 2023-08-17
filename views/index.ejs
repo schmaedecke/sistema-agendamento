@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth",
-          locale: "pt-br",
-        });
-        calendar.render();
-      });
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js"></script>
   </head>
   <body>
     <div id="calendar"></div>
   </body>
+
+  <script>
+    var element = document.getElementById("calendar");
+    var calendar = new FullCalendar.Calendar(element, {
+      initialView: "dayGridMonth",
+      locale: "pt-br",
+      events: "getcalendar",
+      headerToolbar: {
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+      },
+      eventClick: function (info) {
+        window.location.href = "/event/" + info.event.id;
+      },
+    });
+
+    calendar.render();
+  </script>
 </html>

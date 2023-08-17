@@ -7,13 +7,14 @@ class AppointmentFactory {
     var minutes = Number.parseInt(simpleAppointment.time.split(":")[1]);
 
     var startDate = new Date(year, month, day, hour, minutes, 0, 0);
-    startDate.setHours(startDate.getHours() - 3);
 
     var appo = {
       id: simpleAppointment._id,
       title: simpleAppointment.name + " - " + simpleAppointment.description,
-      start_datetime: startDate,
-      end_datetime: startDate,
+      start: startDate,
+      end: startDate,
+      notified: simpleAppointment.notified,
+      email: simpleAppointment.email,
     };
 
     return appo;
