@@ -64,8 +64,14 @@ app.get("/event/:id", async (req, res) => {
 });
 
 app.get("/list", async (req, res) => {
+  await AppointmentService.Search("233.314.454-43");
   var appos = await AppointmentService.GetAll(true);
-  res.render("list", {appos})
+  res.render("list", { appos });
+});
+
+app.get("/searchresult", async (req, res) => {
+  var appos = await AppointmentService.Search(req.query.search);
+  res.render("list", { appos });
 });
 
 app.listen(8070, () => {});
